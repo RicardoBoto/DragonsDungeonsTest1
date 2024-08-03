@@ -10,7 +10,7 @@ public class CaptureAgeToolTest : ModuleRules
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem", "AIModule", "Niagara", "EnhancedInput" });
 
-        PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "UMGEditor", "Blutility" });
+        PrivateDependencyModuleNames.AddRange(new string[] { "UMG", "UMGEditor", "Blutility", "Json", "JsonUtilities", "DesktopPlatform", "Slate" });
 
     }
 }

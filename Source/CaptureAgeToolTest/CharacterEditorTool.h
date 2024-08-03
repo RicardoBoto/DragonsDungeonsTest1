@@ -45,6 +45,8 @@ class CAPTUREAGETOOLTEST_API UCharacterEditorTool : public UUserWidget
 	
 public:
 
+	virtual void NativeOnInitialized() override;
+
 	virtual void NativeConstruct() override;
 
 	UFUNCTION(BlueprintCallable)
@@ -53,11 +55,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetSelectedCharacter(const int32 InCachedIndex);
 
+	void SetSelectedCharacterByRowID(const FName InRowNameID);
+
 	UFUNCTION(BlueprintCallable)
 	void GenerateNewCharacter();
 
 	UFUNCTION(BlueprintCallable)
 	void DeleteCharacter();
+
+	UFUNCTION(BlueprintCallable)
+	void ExportCharacter();
+
+	UFUNCTION(BlueprintCallable)
+	void ImportCharacter();
 
 	void ClearModifiers(FCharacterSpecs& CharSpecs);
 
@@ -68,6 +78,20 @@ public:
 	void LowerClampHability(FCharacterSpecs& CharSpecs, const FDDCharacterAbilityMinTuple& AbiMinMod);
 
 	int32 GetConstitutionHPModifier(const int32 InConsttutionVal) const;
+
+private:
+
+	FString GetExportFolder() const;
+
+	void AddNewCharacterToDB(const FDDCharactersTable& InCharacterData);
+
+	void SaveCharacterTable();
+
+	FName GetNewUniqueNameID(FString CharStrName);
+
+	void UserFeedbackMessage(FString InMessage, FString InTitle = FString());
+
+	void SetUISelection(const bool InIsSelected);
 
 public:
 
@@ -105,6 +129,6 @@ public:
 
 	// ============ Selected Data ============
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	int32 CachedIndex;
+	int32 CachedIndex = -1;
 
 };
